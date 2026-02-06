@@ -108,6 +108,41 @@
 
         /* Urgent Stock Alert */
         .urgent { color: var(--apple-red); font-weight: bold; }
+        .reviews-container {
+    background: #111;
+    border-top: 1px solid #333;
+    padding: 10px 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.reviews-track {
+    display: flex;
+    width: calc(300px * 8); /* Adjust based on number of reviews */
+    animation: scrollReviews 30s linear infinite;
+}
+
+.review-card {
+    width: 280px;
+    background: #2c2c2e;
+    margin: 0 10px;
+    padding: 10px 15px;
+    border-radius: 12px;
+    font-size: 11px;
+    color: #eee;
+    border: 1px solid #444;
+    white-space: nowrap;
+}
+
+@keyframes scrollReviews {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* Pause on hover so people can read */
+.reviews-container:hover .reviews-track {
+    animation-play-state: paused;
+}
     </style>
 </head>
 <body>
@@ -136,6 +171,15 @@
         <div class="chat-area" id="chatDisplay">
             <p class="bot-msg">Welcome to EM'S APPLE SHOP. I'm your Virtual Genius. Check our live prices above. How can I assist you today?</p>
         </div>
+
+<div class="reviews-container">
+    <div class="reviews-track">
+        <div class="review-card">⭐⭐⭐⭐⭐ "Best price for my iPhone 15 Pro!" - Kwesi</div>
+        <div class="review-card">⭐⭐⭐⭐⭐ "Clean UK used 13 Pro Max. Fast delivery!" - Ama</div>
+        <div class="review-card">⭐⭐⭐⭐⭐ "Emma is the most trusted plug in GH. 10/10." - David</div>
+        <div class="review-card">⭐⭐⭐⭐⭐ "Smooth swap process. Highly recommend!" - Sarah</div>
+    </div>
+</div>
 
         <div class="input-container">
             <input type="text" id="userInput" placeholder="Ask about prices or swaps..." autocomplete="off">
@@ -177,6 +221,9 @@
                     return `The iPhone ${model.toUpperCase()} at EM'S is ${item.price}. \n\n${stockStatus} \n\nTap below to order on WhatsApp!`;
                 }
             }
+            if (input.includes("trust") || input.includes("legit") || input.includes("safe")) {
+    return "At EM'S APPLE SHOP, our reputation is our pride! 🌟 Check the scrolling reviews right above—we've served hundreds of happy customers across Ghana. Ready to be the next one?";
+}
 
             // General Business Logic
             if (input.includes("deliver")) return "We deliver nationwide via secure courier! 🚚 Where should we send yours?";
